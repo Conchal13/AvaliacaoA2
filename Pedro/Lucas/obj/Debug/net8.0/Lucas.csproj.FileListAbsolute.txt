@@ -120,3 +120,4 @@ C:\Users\lucas\Documents\Alunos2\Pedro\Lucas\obj\Debug\net8.0\refint\Lucas.dll
 C:\Users\lucas\Documents\Alunos2\Pedro\Lucas\obj\Debug\net8.0\Lucas.pdb
 C:\Users\lucas\Documents\Alunos2\Pedro\Lucas\obj\Debug\net8.0\Lucas.genruntimeconfig.cache
 C:\Users\lucas\Documents\Alunos2\Pedro\Lucas\obj\Debug\net8.0\ref\Lucas.dll
+C:\Users\lucas\Documents\Alunos2\Pedro\Lucas\obj\Debug\net8.0\Lucas.sourcelink.json

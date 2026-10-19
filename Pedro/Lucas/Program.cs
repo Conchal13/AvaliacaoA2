@@ -113,7 +113,9 @@ app.MapGet("/api/folha/total-liquido", async ([FromServices] AppDbContext contex
 
     var totalLiquido = folhas.Select(f => f.SalarioLiquido).Sum();
 
-    return Results.Ok(float.Round(totalLiquido, 2));
+    return Results.Ok(new {
+        salarioLiquido = float.Round(totalLiquido, 2)
+    });
 });
 
 app.Run();
