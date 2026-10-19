@@ -13,3 +13,15 @@ Content-Type: application/json
   "horasTrabalhadas": 160,
   "valorHora": 20
 }
+
+### Requisição listar folhas
+GET http://localhost:5103/api/folha/listar
+
+### Requisição buscar folha
+GET http://localhost:5103/api/folha/buscar/123.456.789-00/07/2025
+
+### Requisição buscar folha
+DELETE http://localhost:5103/api/folha/remover/123.456.789-00/07/2025
+
+### Requisição  folha
+GET http://localhost:5103/api/folha/total-liquido

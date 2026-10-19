@@ -64,9 +64,56 @@ app.MapPost("/api/folha/cadastrar", async ([FromServices] AppDbContext context, 
     }
 });
 
-app.MapGet("/api/folha/listar", () =>
+app.MapGet("/api/folha/listar", async ([FromServices] AppDbContext context) =>
+{   
+    var folhas = await context.Folhas.ToListAsync();
+    if(folhas.Count == 0)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(folhas);
+});
+
+app.MapGet("/api/folha/buscar/{cpf}/{mes}/{ano}", async ([FromServices] AppDbContext context, string cpf, int mes, int ano) =>
 {
+    var folha = await context.Folhas.Where(f => f.Cpf == cpf && f.Mes == mes && f.Ano == ano).FirstOrDefaultAsync();
+
+    if(folha == null)
+    {
+        return Results.NotFound();
+    }
+
+    return Results.Ok(folha);
+});
+
+app.MapDelete("/api/folha/remover/{cpf}/{mes}/{ano}", async ([FromServices] AppDbContext context, string cpf, int mes, int ano) =>
+{
+    var folha = await context.Folhas.Where(f => f.Cpf == cpf && f.Mes == mes && f.Ano == ano).FirstOrDefaultAsync();
     
+    if(folha == null)
+    {
+        return Results.NotFound();
+    }
+
+    context.Folhas.Remove(folha);
+    await context.SaveChangesAsync();
+
+    return Results.Ok("Folha excluida com sucesso");
+});
+
+app.MapGet("/api/folha/total-liquido", async ([FromServices] AppDbContext context) =>
+{
+    var folhas = await context.Folhas.ToListAsync();
+
+    if(folhas.Count == 0)
+    {
+        return Results.NotFound();
+    }
+
+    var totalLiquido = folhas.Select(f => f.SalarioLiquido).Sum();
+
+    return Results.Ok(float.Round(totalLiquido, 2));
 });
 
 app.Run();
